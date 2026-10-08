@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ארגז כלים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Studio design system tokens (see the Studio Design System artifact) */
+:root{
+  --surface-100:#f6f4ef;--surface-200:#ffffff;--surface-300:#ebe7de;
+  --ink:#1b1f27;--ink-muted:#565d6b;--line:#d6d1c4;
+  --brand:#1f4e8c;--brand-ink:#ffffff;--accent:#e07a1f;--accent-ink:#1b1f27;--danger:#b3261e;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;
+  --radius-sm:6px;--radius-md:12px;--radius-lg:20px;--radius-pill:999px;
+  --shadow-bar:0 -4px 16px rgba(0,0,0,.08);
+  --font-sans:"Heebo","Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --surface-100:#14171c;--surface-200:#1d2128;--surface-300:#2a303a;--ink:#eceff4;--ink-muted:#a3abba;--line:#3a414d;
+  --brand:#8ab4f8;--brand-ink:#0e1a2b;--accent:#f0a04b;--danger:#ff8a80;--shadow-bar:0 -4px 16px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{
+  --surface-100:#14171c;--surface-200:#1d2128;--surface-300:#2a303a;--ink:#eceff4;--ink-muted:#a3abba;--line:#3a414d;
+  --brand:#8ab4f8;--brand-ink:#0e1a2b;--accent:#f0a04b;--danger:#ff8a80;--shadow-bar:0 -4px 16px rgba(0,0,0,.4)}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-100);color:var(--ink);font:400 16px/24px var(--font-sans);min-height:100vh;display:flex;flex-direction:column}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+
+/* header: logo 1 on the right, icons on the left (RTL) */
+header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-8);gap:var(--space-4)}
+.logo{display:block;height:48px;max-width:160px;object-fit:contain}
+.icons{display:flex;gap:var(--space-2)}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-200);cursor:pointer}
+.icon-btn:hover{background:var(--surface-300)}
+.icon-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+main{flex:1;width:100%;max-width:960px;margin:0 auto;padding:var(--space-4) var(--space-8) var(--space-8)}
+h1{font:700 40px/44px var(--font-sans);margin:0 0 var(--space-2)}
+.lede{color:var(--ink-muted);margin:0 0 var(--space-6)}
+.toolbar{display:flex;gap:var(--space-2);margin-bottom:var(--space-6);flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface-200);border-radius:var(--radius-pill);padding:var(--space-2) var(--space-4);font-weight:600;cursor:pointer}
+.btn:hover{background:var(--surface-300)}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:transparent}
+.btn.primary:hover{background:var(--brand);filter:brightness(.92)}
+.btn.danger{color:var(--danger)}
+.btn[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:transparent}
+
+section{margin-bottom:var(--space-8)}
+h2{font:700 22px/28px var(--font-sans);margin:0 0 var(--space-3);display:flex;align-items:center;gap:var(--space-2)}
+h2::before{content:"";width:10px;height:22px;border-radius:var(--radius-sm);background:var(--sec,var(--brand))}
+#sec-desktop{--sec:var(--brand)}#sec-web{--sec:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-3)}
+.tool-wrap{position:relative}
+.tool{width:100%;display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--surface-200);border:1px solid var(--line);border-radius:var(--radius-md);cursor:pointer;text-align:start;font-weight:600;font-size:15px;line-height:20px;text-decoration:none;color:var(--ink)}
+.tool:hover{background:var(--surface-300)}
+.tile{width:40px;height:40px;flex:none;border-radius:var(--radius-sm);background:var(--surface-300);display:grid;place-items:center;font-weight:700;color:var(--brand)}
+.tool:hover .tile{background:var(--surface-200)}
+.cap{display:block;font-weight:400;font-size:13px;line-height:18px;color:var(--ink-muted)}
+.del{position:absolute;top:6px;inset-inline-end:6px;width:28px;height:28px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--surface-200);color:var(--danger);cursor:pointer;display:none;line-height:1}
+body.editing .del{display:block}
+.add-tool{display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);min-height:66px;border-radius:var(--radius-md);border:0;background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
+.add-tool:hover{filter:brightness(.94)}
+body.editing [data-edit]{outline:1px dashed var(--line);outline-offset:4px;border-radius:var(--radius-sm);cursor:text}
+.empty{color:var(--ink-muted);font-size:13px;grid-column:1/-1}
+
+/* footer: chat bar then logo 2 centred */
+footer{position:sticky;bottom:0;background:var(--surface-100);padding:var(--space-3) var(--space-8) var(--space-3);box-shadow:var(--shadow-bar)}
+.chat{max-width:760px;margin:0 auto}
+#log{max-height:35vh;overflow:auto;display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-2)}
+#log:empty{display:none}
+.msg{padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);max-width:85%;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.user{align-self:flex-start;background:var(--brand);color:var(--brand-ink)}
+.msg.bot{align-self:flex-end;background:var(--surface-200);border:1px solid var(--line)}
+.msg.err{color:var(--danger)}
+.bar{display:flex;gap:var(--space-2);align-items:center;background:var(--surface-200);border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-2)}
+.bar:focus-within{outline:3px solid var(--brand);outline-offset:2px}
+.bar input{flex:1;border:0;background:transparent;padding:var(--space-2) var(--space-3);outline:none;min-width:0}
+.bar input::placeholder{color:var(--ink-muted)}
+.bar .btn.primary{padding-inline:var(--space-6)}
+.logo2-wrap{display:flex;justify-content:center;padding-top:var(--space-3)}
+
+dialog{border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-200);color:var(--ink);padding:var(--space-6);width:min(440px,calc(100vw - 32px))}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h3{margin:0 0 var(--space-4);font:700 22px/28px var(--font-sans)}
+label{display:block;font-weight:600;font-size:14px;margin:var(--space-3) 0 var(--space-1)}
+.field{width:100%;padding:var(--space-2) var(--space-3);border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface-100)}
+.hint{font-size:13px;line-height:18px;color:var(--ink-muted);margin:var(--space-1) 0 0}
+.actions{display:flex;gap:var(--space-2);justify-content:flex-start;margin-top:var(--space-6)}
+@media (max-width:600px){header,footer{padding-inline:var(--space-4)}main{padding-inline:var(--space-4)}h1{font-size:32px;line-height:36px}}
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" id="logo1" alt="לוגו 1" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Crect width='48' height='48' rx='12' fill='%231f4e8c'/%3E%3Crect x='56' y='6' width='96' height='14' rx='4' fill='%23e07a1f'/%3E%3Crect x='56' y='28' width='64' height='14' rx='4' fill='%23888'/%3E%3C/svg%3E">
+  <div class="icons">
+    <button class="icon-btn" id="btn-settings" title="הגדרות" aria-label="הגדרות"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+    <button class="icon-btn" id="btn-help" title="עזרה" aria-label="עזרה"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5M12 17.5h.01"/></svg></button>
+    <button class="icon-btn" id="btn-exit" title="יציאה" aria-label="יציאה"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <h1 data-edit="title">ארגז כלים</h1>
+  <p class="lede" data-edit="lede">כל הכלים שלי במקום אחד: אפליקציות דסקטופ ואתרים.</p>
+  <div class="toolbar">
+    <button class="btn" id="btn-edit" aria-pressed="false">מצב עריכה</button>
+  </div>
+
+  <section id="sec-desktop">
+    <h2 data-edit="h-desktop">ארגז כלים — דסקטופ</h2>
+    <div class="grid" id="grid-desktop"></div>
+  </section>
+  <section id="sec-web">
+    <h2 data-edit="h-web">ארגז כלים — רשת</h2>
+    <div class="grid" id="grid-web"></div>
+  </section>
+  <button class="add-tool" id="btn-add" style="width:100%;max-width:280px">+ הוסף כלי חדש</button>
+</main>
+
+<footer>
+  <div class="chat">
+    <div id="log" aria-live="polite"></div>
+    <form class="bar" id="chat-form">
+      <input id="chat-input" placeholder="כתוב הודעה ל-Claude…" aria-label="הודעה" autocomplete="off">
+      <button class="btn primary" type="submit" id="send">שלח</button>
+    </form>
+  </div>
+  <div class="logo2-wrap"><img class="logo" id="logo2" alt="לוגו 2" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%23e07a1f'/%3E%3Crect x='56' y='6' width='96' height='14' rx='7' fill='%231f4e8c'/%3E%3Crect x='56' y='28' width='64' height='14' rx='7' fill='%23888'/%3E%3C/svg%3E"></div>
+</footer>
+
+<dialog id="dlg-add">
+  <form method="dialog" id="form-add">
+    <h3>הוסף כלי חדש</h3>
+    <label for="f-name">שם הכלי</label><input class="field" id="f-name" required maxlength="40">
+    <label for="f-type">סוג</label>
+    <select class="field" id="f-type"><option value="desktop">דסקטופ</option><option value="web">רשת</option></select>
+    <label for="f-url">כתובת או קישור לאפליקציה</label>
+    <input class="field" id="f-url" dir="ltr" placeholder="https://example.com או vscode://" required>
+    <p class="hint">אפשר כתובת אתר, או קישור לאפליקציה כמו vscode:// או slack://</p>
+    <div class="actions"><button class="btn primary" value="ok">הוסף</button><button class="btn" value="cancel" formnovalidate>ביטול</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-settings">
+  <form method="dialog" id="form-settings">
+    <h3>הגדרות</h3>
+    <label for="s-key">מפתח API של Anthropic</label>
+    <input class="field" id="s-key" type="password" dir="ltr" placeholder="sk-ant-…" autocomplete="off">
+    <p class="hint">המפתח נשמר רק בדפדפן הזה (localStorage) ונשלח ישירות ל-api.anthropic.com. אל תשתמש בו במחשב משותף.</p>
+    <label for="s-model">מודל</label>
+    <input class="field" id="s-model" dir="ltr" value="claude-sonnet-5-5">
+    <label for="s-logo1">לוגו 1 (ימין למעלה)</label><input class="field" id="s-logo1" type="file" accept="image/*">
+    <label for="s-logo2">לוגו 2 (למטה במרכז)</label><input class="field" id="s-logo2" type="file" accept="image/*">
+    <div class="actions"><button class="btn primary" value="ok">שמור</button><button class="btn" value="cancel" formnovalidate>סגור</button><button class="btn danger" type="button" id="btn-reset">אפס הכול</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-help">
+  <h3>עזרה</h3>
+  <p>לחיצה על כפתור כלי פותחת אותו. "מצב עריכה" מאפשר לשנות כותרות ולמחוק כלים. "הוסף כלי חדש" מוסיף כפתור.</p>
+  <p>כדי להשתמש בצ'אט, הכנס מפתח API של Anthropic בהגדרות. כל השינויים נשמרים בדפדפן.</p>
+  <form method="dialog" class="actions"><button class="btn primary">סגור</button></form>
+</dialog>
+
+<script>
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  del(k){ try { localStorage.removeItem(k); } catch {} }
+};
+const DEFAULT_TOOLS = [
+  {id:'d1', name:'VS Code', type:'desktop', url:'vscode://'},
+  {id:'d2', name:'Slack', type:'desktop', url:'slack://open'},
+  {id:'w1', name:'Claude', type:'web', url:'https://claude.ai'},
+  {id:'w2', name:'GitHub', type:'web', url:'https://github.com'},
+  {id:'w3', name:'Notion', type:'web', url:'https://notion.so'}
+];
+let tools = store.get('tb.tools', DEFAULT_TOOLS);
+const safeUrl = u => { try { const p = new URL(u, 'https://x.invalid').protocol; return !/^(javascript|data|vbscript):/i.test(p) ; } catch { return false; } };
+
+function render(){
+  for (const type of ['desktop','web']) {
+    const grid = $('#grid-' + type); grid.replaceChildren();
+    const list = tools.filter(t => t.type === type);
+    if (!list.length) { const p = document.createElement('p'); p.className = 'empty'; p.textContent = 'אין כלים עדיין.'; grid.append(p); }
+    for (const t of list) {
+      const wrap = document.createElement('div'); wrap.className = 'tool-wrap';
+      const a = document.createElement('a'); a.className = 'tool';
+      if (safeUrl(t.url)) { a.href = t.url; if (/^https?:/i.test(t.url)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; } }
+      const tile = document.createElement('span'); tile.className = 'tile'; tile.textContent = [...t.name][0] || '?';
+      const txt = document.createElement('span'); txt.textContent = t.name;
+      const cap = document.createElement('span'); cap.className = 'cap'; cap.textContent = type === 'desktop' ? 'דסקטופ' : 'רשת';
+      txt.append(cap); a.append(tile, txt);
+      const del = document.createElement('button'); del.className = 'del'; del.type = 'button'; del.title = 'מחק'; del.setAttribute('aria-label', 'מחק ' + t.name); del.textContent = '×';
+      del.onclick = () => { tools = tools.filter(x => x.id !== t.id); store.set('tb.tools', tools); render(); };
+      wrap.append(a, del); grid.append(wrap);
+    }
+  }
+}
+render();
+
+// editable texts
+const texts = store.get('tb.texts', {});
+document.querySelectorAll('[data-edit]').forEach(el => {
+  const k = el.dataset.edit; if (texts[k]) el.textContent = texts[k];
+  el.addEventListener('blur', () => { texts[k] = el.textContent.trim() || el.textContent; store.set('tb.texts', texts); });
+});
+$('#btn-edit').onclick = e => {
+  const on = document.body.classList.toggle('editing');
+  e.currentTarget.setAttribute('aria-pressed', on);
+  document.querySelectorAll('[data-edit]').forEach(el => el.contentEditable = on ? 'plaintext-only' : 'false');
+};
+
+// add tool
+$('#btn-add').onclick = () => { $('#form-add').reset(); $('#dlg-add').showModal(); };
+$('#dlg-add').addEventListener('close', () => {
+  if ($('#dlg-add').returnValue !== 'ok') return;
+  const url = $('#f-url').value.trim();
+  if (!safeUrl(url)) return alert('קישור לא תקין');
+  tools.push({id:'t' + Date.now(), name:$('#f-name').value.trim(), type:$('#f-type').value, url});
+  store.set('tb.tools', tools); render();
+});
+
+// settings
+const dlgS = $('#dlg-settings');
+$('#btn-settings').onclick = () => { $('#s-key').value = store.get('tb.key', ''); $('#s-model').value = store.get('tb.model', 'claude-sonnet-5-5'); dlgS.showModal(); };
+dlgS.addEventListener('close', () => {
+  if (dlgS.returnValue !== 'ok') return;
+  store.set('tb.key', $('#s-key').value.trim()); store.set('tb.model', $('#s-model').value.trim() || 'claude-sonnet-5-5');
+});
+for (const n of [1, 2]) {
+  const img = $('#logo' + n), saved = store.get('tb.logo' + n, null); if (saved) img.src = saved;
+  $('#s-logo' + n).onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    const r = new FileReader(); r.onload = () => { img.src = r.result; store.set('tb.logo' + n, r.result); }; r.readAsDataURL(f);
+  };
+}
+$('#btn-reset').onclick = () => { if (confirm('למחוק את כל הנתונים השמורים?')) { ['tb.tools','tb.texts','tb.key','tb.model','tb.logo1','tb.logo2'].forEach(store.del); location.reload(); } };
+$('#btn-help').onclick = () => $('#dlg-help').showModal();
+$('#btn-exit').onclick = () => { if (confirm('לצאת מארגז הכלים?')) { window.close(); setTimeout(() => { document.body.replaceChildren(Object.assign(document.createElement('p'), {textContent:'יצאת. אפשר לסגור את הלשונית.', style:'padding:32px'})); }, 150); } };
+
+// chat
+const history = [];
+function addMsg(cls, text){ const d = document.createElement('div'); d.className = 'msg ' + cls; d.textContent = text; $('#log').append(d); d.scrollIntoView({block:'nearest'}); return d; }
+$('#chat-form').onsubmit = async e => {
+  e.preventDefault();
+  const input = $('#chat-input'), text = input.value.trim(); if (!text) return;
+  const key = store.get('tb.key', '');
+  if (!key) { addMsg('bot err', 'חסר מפתח API. הוסף אותו בהגדרות (סמל גלגל השיניים).'); return; }
+  input.value = ''; addMsg('user', text); history.push({role:'user', content:text});
+  const pending = addMsg('bot', '…'); $('#send').disabled = true;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:store.get('tb.model','claude-sonnet-5-5'), max_tokens:1024, messages:history})
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error?.message || res.statusText);
+    const reply = (data.content || []).map(b => b.text || '').join('');
+    history.push({role:'assistant', content:reply}); pending.textContent = reply;
+  } catch (err) { history.pop(); pending.className = 'msg bot err'; pending.textContent = 'שגיאה: ' + err.message; }
+  finally { $('#send').disabled = false; }
+};
+</script>
+</body>
+</html>
