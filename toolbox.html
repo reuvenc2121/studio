@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* Studio design system tokens (see the Studio Design System artifact) */
+/* Studio design system tokens */
 :root{
   --surface-100:#f6f4ef;--surface-200:#ffffff;--surface-300:#ebe7de;
   --ink:#1b1f27;--ink-muted:#565d6b;--line:#d6d1c4;
@@ -28,96 +28,81 @@
 body{margin:0;background:var(--surface-100);color:var(--ink);font:400 16px/24px var(--font-sans);min-height:100vh;display:flex;flex-direction:column}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* header: logo 1 on the right, icons on the left (RTL) */
-header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-8);gap:var(--space-4)}
-.logo{display:block;height:48px;max-width:160px;object-fit:contain}
-.icons{display:flex;gap:var(--space-2)}
-.icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-200);cursor:pointer}
-.icon-btn:hover{background:var(--surface-300)}
-.icon-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* header: logo on the right, 3 small icons on the left */
+header{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-8)}
+.logo{display:block;height:44px;max-width:150px;object-fit:contain}
+.icons{display:flex;gap:var(--space-1)}
+.icon-btn{width:36px;height:36px;display:grid;place-items:center;border-radius:var(--radius-pill);border:0;background:transparent;color:var(--ink-muted);cursor:pointer;font-size:20px}
+.icon-btn:hover{background:var(--surface-300);color:var(--ink)}
 
-main{flex:1;width:100%;max-width:960px;margin:0 auto;padding:var(--space-4) var(--space-8) var(--space-8)}
-h1{font:700 40px/44px var(--font-sans);margin:0 0 var(--space-2)}
-.lede{color:var(--ink-muted);margin:0 0 var(--space-6)}
-.toolbar{display:flex;gap:var(--space-2);margin-bottom:var(--space-6);flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--surface-200);border-radius:var(--radius-pill);padding:var(--space-2) var(--space-4);font-weight:600;cursor:pointer}
-.btn:hover{background:var(--surface-300)}
-.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:transparent}
-.btn.primary:hover{background:var(--brand);filter:brightness(.92)}
-.btn.danger{color:var(--danger)}
-.btn[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:transparent}
+main{flex:1;width:100%;max-width:960px;margin:0 auto;padding:var(--space-4) var(--space-8) var(--space-6)}
+.group-label{display:flex;align-items:center;gap:var(--space-2);margin:var(--space-4) 0 var(--space-3);font:600 14px/20px var(--font-sans);color:var(--ink-muted)}
+.group-label .i{font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:var(--space-4) var(--space-3)}
+.tool{display:flex;flex-direction:column;align-items:center;gap:var(--space-2);text-decoration:none;color:var(--ink);font:600 14px/18px var(--font-sans);text-align:center;border-radius:var(--radius-md);padding:var(--space-1)}
+.tool .tile{width:84px;height:84px;border-radius:var(--radius-lg);display:grid;place-items:center;font-size:40px;font-weight:700;transition:transform .12s}
+.tool:hover .tile{transform:translateY(-3px)}
+.tool .name{max-width:100%;overflow-wrap:anywhere}
+.tile.desktop{background:var(--brand);color:var(--brand-ink)}
+.tile.web{background:var(--accent);color:var(--accent-ink)}
+.tile.add{background:var(--surface-200);color:var(--ink-muted);border:2px dashed var(--line)}
+button.tool{background:none;border:0;cursor:pointer}
 
-section{margin-bottom:var(--space-8)}
-h2{font:700 22px/28px var(--font-sans);margin:0 0 var(--space-3);display:flex;align-items:center;gap:var(--space-2)}
-h2::before{content:"";width:10px;height:22px;border-radius:var(--radius-sm);background:var(--sec,var(--brand))}
-#sec-desktop{--sec:var(--brand)}#sec-web{--sec:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-3)}
-.tool-wrap{position:relative}
-.tool{width:100%;display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--surface-200);border:1px solid var(--line);border-radius:var(--radius-md);cursor:pointer;text-align:start;font-weight:600;font-size:15px;line-height:20px;text-decoration:none;color:var(--ink)}
-.tool:hover{background:var(--surface-300)}
-.tile{width:40px;height:40px;flex:none;border-radius:var(--radius-sm);background:var(--surface-300);display:grid;place-items:center;font-weight:700;color:var(--brand)}
-.tool:hover .tile{background:var(--surface-200)}
-.cap{display:block;font-weight:400;font-size:13px;line-height:18px;color:var(--ink-muted)}
-.del{position:absolute;top:6px;inset-inline-end:6px;width:28px;height:28px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--surface-200);color:var(--danger);cursor:pointer;display:none;line-height:1}
-body.editing .del{display:block}
-.add-tool{display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);min-height:66px;border-radius:var(--radius-md);border:0;background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
-.add-tool:hover{filter:brightness(.94)}
-body.editing [data-edit]{outline:1px dashed var(--line);outline-offset:4px;border-radius:var(--radius-sm);cursor:text}
-.empty{color:var(--ink-muted);font-size:13px;grid-column:1/-1}
-
-/* footer: chat bar then logo 2 centred */
-footer{position:sticky;bottom:0;background:var(--surface-100);padding:var(--space-3) var(--space-8) var(--space-3);box-shadow:var(--shadow-bar)}
-.chat{max-width:760px;margin:0 auto}
-#log{max-height:35vh;overflow:auto;display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-2)}
+/* footer: small chat row + logo 2 */
+footer{position:sticky;bottom:0;background:var(--surface-100);padding:var(--space-2) var(--space-8) var(--space-2);box-shadow:var(--shadow-bar)}
+.chat{max-width:640px;margin:0 auto}
+#log{max-height:30vh;overflow:auto;display:flex;flex-direction:column;gap:var(--space-1);margin-bottom:var(--space-2);font-size:14px;line-height:20px}
 #log:empty{display:none}
-.msg{padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);max-width:85%;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg{padding:var(--space-1) var(--space-3);border-radius:var(--radius-md);max-width:88%;white-space:pre-wrap;overflow-wrap:anywhere}
 .msg.user{align-self:flex-start;background:var(--brand);color:var(--brand-ink)}
 .msg.bot{align-self:flex-end;background:var(--surface-200);border:1px solid var(--line)}
 .msg.err{color:var(--danger)}
-.bar{display:flex;gap:var(--space-2);align-items:center;background:var(--surface-200);border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-2)}
+.bar{display:flex;gap:var(--space-2);align-items:center;background:var(--surface-200);border:1px solid var(--line);border-radius:var(--radius-pill);padding:var(--space-1) var(--space-1) var(--space-1) var(--space-1)}
 .bar:focus-within{outline:3px solid var(--brand);outline-offset:2px}
-.bar input{flex:1;border:0;background:transparent;padding:var(--space-2) var(--space-3);outline:none;min-width:0}
+.bar input{flex:1;border:0;background:transparent;padding:var(--space-1) var(--space-3);outline:none;min-width:0;font-size:15px}
 .bar input::placeholder{color:var(--ink-muted)}
-.bar .btn.primary{padding-inline:var(--space-6)}
-.logo2-wrap{display:flex;justify-content:center;padding-top:var(--space-3)}
+.send{width:36px;height:36px;border-radius:var(--radius-pill);border:0;background:var(--brand);color:var(--brand-ink);cursor:pointer;display:grid;place-items:center;font-size:18px}
+.send:disabled{opacity:.5}
+.send .i{transform:scaleX(-1)}
+.logo2-wrap{display:flex;justify-content:center;padding-top:var(--space-2)}
+.logo2-wrap .logo{height:28px}
 
-dialog{border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-200);color:var(--ink);padding:var(--space-6);width:min(440px,calc(100vw - 32px))}
+/* dialogs */
+dialog{border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface-200);color:var(--ink);padding:var(--space-6);width:min(640px,calc(100vw - 24px));max-height:90vh}
 dialog::backdrop{background:rgba(0,0,0,.45)}
-dialog h3{margin:0 0 var(--space-4);font:700 22px/28px var(--font-sans)}
+dialog h3{margin:0 0 var(--space-3);font:700 22px/28px var(--font-sans)}
+dialog h4{margin:var(--space-6) 0 var(--space-2);font:700 16px/24px var(--font-sans)}
 label{display:block;font-weight:600;font-size:14px;margin:var(--space-3) 0 var(--space-1)}
 .field{width:100%;padding:var(--space-2) var(--space-3);border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface-100)}
 .hint{font-size:13px;line-height:18px;color:var(--ink-muted);margin:var(--space-1) 0 0}
-.actions{display:flex;gap:var(--space-2);justify-content:flex-start;margin-top:var(--space-6)}
-@media (max-width:600px){header,footer{padding-inline:var(--space-4)}main{padding-inline:var(--space-4)}h1{font-size:32px;line-height:36px}}
+.btn{border:1px solid var(--line);background:var(--surface-200);border-radius:var(--radius-pill);padding:var(--space-2) var(--space-4);font-weight:600;cursor:pointer}
+.btn:hover{background:var(--surface-300)}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:transparent}
+.btn.danger{color:var(--danger)}
+.actions{display:flex;gap:var(--space-2);margin-top:var(--space-6);flex-wrap:wrap}
+.row{display:grid;grid-template-columns:44px 1fr 1fr;gap:var(--space-2);padding:var(--space-3);border:1px solid var(--line);border-radius:var(--radius-md);margin-bottom:var(--space-2);align-items:center}
+.row .tile{width:44px;height:44px;border-radius:var(--radius-sm);display:grid;place-items:center;font-size:24px;font-weight:700}
+.row .full{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr auto;gap:var(--space-2);align-items:center}
+@media (max-width:600px){header,footer,main{padding-inline:var(--space-4)}.row{grid-template-columns:44px 1fr}.row .full{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <header>
-  <img class="logo" id="logo1" alt="לוגו 1" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Crect width='48' height='48' rx='12' fill='%231f4e8c'/%3E%3Crect x='56' y='6' width='96' height='14' rx='4' fill='%23e07a1f'/%3E%3Crect x='56' y='28' width='64' height='14' rx='4' fill='%23888'/%3E%3C/svg%3E">
+  <img class="logo" id="logo1" alt="לוגו" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Crect width='48' height='48' rx='12' fill='%231f4e8c'/%3E%3Crect x='56' y='6' width='96' height='14' rx='4' fill='%23e07a1f'/%3E%3Crect x='56' y='28' width='64' height='14' rx='4' fill='%23888'/%3E%3C/svg%3E">
   <div class="icons">
-    <button class="icon-btn" id="btn-settings" title="הגדרות" aria-label="הגדרות"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
-    <button class="icon-btn" id="btn-help" title="עזרה" aria-label="עזרה"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5M12 17.5h.01"/></svg></button>
-    <button class="icon-btn" id="btn-exit" title="יציאה" aria-label="יציאה"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+    <button class="icon-btn" id="btn-settings" title="הגדרות" aria-label="הגדרות"></button>
+    <button class="icon-btn" id="btn-help" title="עזרה" aria-label="עזרה"></button>
+    <button class="icon-btn" id="btn-exit" title="יציאה" aria-label="יציאה"></button>
   </div>
 </header>
 
 <main>
-  <h1 data-edit="title">ארגז כלים</h1>
-  <p class="lede" data-edit="lede">כל הכלים שלי במקום אחד: אפליקציות דסקטופ ואתרים.</p>
-  <div class="toolbar">
-    <button class="btn" id="btn-edit" aria-pressed="false">מצב עריכה</button>
-  </div>
-
-  <section id="sec-desktop">
-    <h2 data-edit="h-desktop">ארגז כלים — דסקטופ</h2>
-    <div class="grid" id="grid-desktop"></div>
-  </section>
-  <section id="sec-web">
-    <h2 data-edit="h-web">ארגז כלים — רשת</h2>
-    <div class="grid" id="grid-web"></div>
-  </section>
-  <button class="add-tool" id="btn-add" style="width:100%;max-width:280px">+ הוסף כלי חדש</button>
+  <div class="group-label" id="lbl-desktop"></div>
+  <div class="grid" id="grid-desktop"></div>
+  <div class="group-label" id="lbl-web"></div>
+  <div class="grid" id="grid-web"></div>
 </main>
 
 <footer>
@@ -125,42 +110,38 @@ label{display:block;font-weight:600;font-size:14px;margin:var(--space-3) 0 var(-
     <div id="log" aria-live="polite"></div>
     <form class="bar" id="chat-form">
       <input id="chat-input" placeholder="כתוב הודעה ל-Claude…" aria-label="הודעה" autocomplete="off">
-      <button class="btn primary" type="submit" id="send">שלח</button>
+      <button class="send" type="submit" id="send" title="שלח" aria-label="שלח"></button>
     </form>
   </div>
   <div class="logo2-wrap"><img class="logo" id="logo2" alt="לוגו 2" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%23e07a1f'/%3E%3Crect x='56' y='6' width='96' height='14' rx='7' fill='%231f4e8c'/%3E%3Crect x='56' y='28' width='64' height='14' rx='7' fill='%23888'/%3E%3C/svg%3E"></div>
 </footer>
 
-<dialog id="dlg-add">
-  <form method="dialog" id="form-add">
-    <h3>הוסף כלי חדש</h3>
-    <label for="f-name">שם הכלי</label><input class="field" id="f-name" required maxlength="40">
-    <label for="f-type">סוג</label>
-    <select class="field" id="f-type"><option value="desktop">דסקטופ</option><option value="web">רשת</option></select>
-    <label for="f-url">כתובת או קישור לאפליקציה</label>
-    <input class="field" id="f-url" dir="ltr" placeholder="https://example.com או vscode://" required>
-    <p class="hint">אפשר כתובת אתר, או קישור לאפליקציה כמו vscode:// או slack://</p>
-    <div class="actions"><button class="btn primary" value="ok">הוסף</button><button class="btn" value="cancel" formnovalidate>ביטול</button></div>
-  </form>
-</dialog>
-
 <dialog id="dlg-settings">
-  <form method="dialog" id="form-settings">
-    <h3>הגדרות</h3>
-    <label for="s-key">מפתח API של Anthropic</label>
-    <input class="field" id="s-key" type="password" dir="ltr" placeholder="sk-ant-…" autocomplete="off">
-    <p class="hint">המפתח נשמר רק בדפדפן הזה (localStorage) ונשלח ישירות ל-api.anthropic.com. אל תשתמש בו במחשב משותף.</p>
-    <label for="s-model">מודל</label>
-    <input class="field" id="s-model" dir="ltr" value="claude-sonnet-5-5">
-    <label for="s-logo1">לוגו 1 (ימין למעלה)</label><input class="field" id="s-logo1" type="file" accept="image/*">
-    <label for="s-logo2">לוגו 2 (למטה במרכז)</label><input class="field" id="s-logo2" type="file" accept="image/*">
-    <div class="actions"><button class="btn primary" value="ok">שמור</button><button class="btn" value="cancel" formnovalidate>סגור</button><button class="btn danger" type="button" id="btn-reset">אפס הכול</button></div>
-  </form>
+  <h3>הגדרות</h3>
+
+  <h4>הקיצורים שלי</h4>
+  <p class="hint">לכל כלי: שם, סוג (דסקטופ או רשת), קישור או קיצור, ואייקון. לאפליקציית דסקטופ השתמש בקישור כמו vscode:// או slack://. לאתר – כתובת מלאה. השינויים נשמרים מיד.</p>
+  <div id="rows"></div>
+  <button class="btn" type="button" id="btn-add-row">+ הוסף כלי חדש</button>
+
+  <h4>צ'אט</h4>
+  <label for="s-key">מפתח API של Anthropic</label>
+  <input class="field" id="s-key" type="password" dir="ltr" placeholder="sk-ant-…" autocomplete="off">
+  <p class="hint">המפתח נשמר רק בדפדפן הזה ונשלח ישירות ל-api.anthropic.com.</p>
+  <label for="s-model">מודל</label>
+  <input class="field" id="s-model" dir="ltr">
+
+  <h4>לוגואים</h4>
+  <label for="s-logo1">לוגו (ימין למעלה)</label><input class="field" id="s-logo1" type="file" accept="image/*">
+  <label for="s-logo2">לוגו 2 (למטה במרכז)</label><input class="field" id="s-logo2" type="file" accept="image/*">
+
+  <div class="actions"><button class="btn primary" type="button" id="btn-close-settings">שמור וסגור</button><button class="btn danger" type="button" id="btn-reset">אפס הכול</button></div>
 </dialog>
 
 <dialog id="dlg-help">
   <h3>עזרה</h3>
-  <p>לחיצה על כפתור כלי פותחת אותו. "מצב עריכה" מאפשר לשנות כותרות ולמחוק כלים. "הוסף כלי חדש" מוסיף כפתור.</p>
+  <p>לחיצה על אייקון פותחת את הכלי. בכחול – כלי דסקטופ, בכתום – כלי רשת.</p>
+  <p>כדי לשנות קיצור או להוסיף כלי: הגדרות ← הקיצורים שלי. אפשר גם ללחוץ על הריבוע המקווקו "הוסף".</p>
   <p>כדי להשתמש בצ'אט, הכנס מפתח API של Anthropic בהגדרות. כל השינויים נשמרים בדפדפן.</p>
   <form method="dialog" class="actions"><button class="btn primary">סגור</button></form>
 </dialog>
@@ -172,76 +153,128 @@ const store = {
   set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
   del(k){ try { localStorage.removeItem(k); } catch {} }
 };
+
+// built-in line icons (24 grid), inner SVG markup
+const ICONS = {
+  letter:null,
+  code:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+  terminal:'<path d="m4 6 6 6-6 6M12 19h8"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  file:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  chat:'<path d="M21 12a8 8 0 0 1-11.7 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/>',
+  note:'<path d="M5 4h10l4 4v12H5zM9 12h6M9 16h4"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>',
+  music:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/>',
+  cart:'<path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  cloud:'<path d="M7 18a5 5 0 1 1 1-9.9A6 6 0 0 1 19.5 11 3.5 3.5 0 0 1 18 18z"/>',
+  chart:'<path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  help:'<circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5M12 17.5h.01"/>',
+  exit:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  send:'<path d="m3 11 18-8-8 18-2-8z"/>',
+  monitor:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'
+};
+const ICON_LABELS = {letter:'אות ראשונה',code:'קוד',terminal:'טרמינל',globe:'גלובוס',folder:'תיקייה',file:'קובץ',mail:'דואר',calendar:'יומן',chat:'צ\'אט',note:'פתק',image:'תמונה',music:'מוזיקה',video:'וידאו',cart:'עגלה',search:'חיפוש',star:'כוכב',bolt:'ברק',book:'ספר',camera:'מצלמה',cloud:'ענן',chart:'גרף'};
+const svg = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+function paintTile(el, tool){
+  el.className = 'tile ' + tool.type;
+  if (tool.icon && ICONS[tool.icon]) el.innerHTML = svg(tool.icon);
+  else el.textContent = [...(tool.name || '?')][0];
+}
+
+$('#btn-settings').innerHTML = svg('settings');
+$('#btn-help').innerHTML = svg('help');
+$('#btn-exit').innerHTML = svg('exit');
+$('#send').innerHTML = svg('send');
+$('#lbl-desktop').innerHTML = svg('monitor') + '<span>דסקטופ</span>';
+$('#lbl-web').innerHTML = svg('globe') + '<span>רשת</span>';
+
 const DEFAULT_TOOLS = [
-  {id:'d1', name:'VS Code', type:'desktop', url:'vscode://'},
-  {id:'d2', name:'Slack', type:'desktop', url:'slack://open'},
-  {id:'w1', name:'Claude', type:'web', url:'https://claude.ai'},
-  {id:'w2', name:'GitHub', type:'web', url:'https://github.com'},
-  {id:'w3', name:'Notion', type:'web', url:'https://notion.so'}
+  {id:'d1', name:'VS Code', type:'desktop', url:'vscode://', icon:'code'},
+  {id:'d2', name:'Slack', type:'desktop', url:'slack://open', icon:'chat'},
+  {id:'d3', name:'תיקיות', type:'desktop', url:'file:///', icon:'folder'},
+  {id:'w1', name:'Claude', type:'web', url:'https://claude.ai', icon:'star'},
+  {id:'w2', name:'GitHub', type:'web', url:'https://github.com', icon:'code'},
+  {id:'w3', name:'Notion', type:'web', url:'https://notion.so', icon:'note'},
+  {id:'w4', name:'Gmail', type:'web', url:'https://mail.google.com', icon:'mail'},
+  {id:'w5', name:'יומן', type:'web', url:'https://calendar.google.com', icon:'calendar'}
 ];
-let tools = store.get('tb.tools', DEFAULT_TOOLS);
-const safeUrl = u => { try { const p = new URL(u, 'https://x.invalid').protocol; return !/^(javascript|data|vbscript):/i.test(p) ; } catch { return false; } };
+let tools = store.get('tb2.tools', DEFAULT_TOOLS);
+const save = () => store.set('tb2.tools', tools);
+const safeUrl = u => { try { return !/^(javascript|data|vbscript):/i.test(new URL(u).protocol); } catch { return false; } };
 
 function render(){
   for (const type of ['desktop','web']) {
     const grid = $('#grid-' + type); grid.replaceChildren();
-    const list = tools.filter(t => t.type === type);
-    if (!list.length) { const p = document.createElement('p'); p.className = 'empty'; p.textContent = 'אין כלים עדיין.'; grid.append(p); }
-    for (const t of list) {
-      const wrap = document.createElement('div'); wrap.className = 'tool-wrap';
-      const a = document.createElement('a'); a.className = 'tool';
+    for (const t of tools.filter(x => x.type === type)) {
+      const a = document.createElement('a'); a.className = 'tool'; a.title = t.url;
       if (safeUrl(t.url)) { a.href = t.url; if (/^https?:/i.test(t.url)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; } }
-      const tile = document.createElement('span'); tile.className = 'tile'; tile.textContent = [...t.name][0] || '?';
-      const txt = document.createElement('span'); txt.textContent = t.name;
-      const cap = document.createElement('span'); cap.className = 'cap'; cap.textContent = type === 'desktop' ? 'דסקטופ' : 'רשת';
-      txt.append(cap); a.append(tile, txt);
-      const del = document.createElement('button'); del.className = 'del'; del.type = 'button'; del.title = 'מחק'; del.setAttribute('aria-label', 'מחק ' + t.name); del.textContent = '×';
-      del.onclick = () => { tools = tools.filter(x => x.id !== t.id); store.set('tb.tools', tools); render(); };
-      wrap.append(a, del); grid.append(wrap);
+      const tile = document.createElement('span'); paintTile(tile, t);
+      const name = document.createElement('span'); name.className = 'name'; name.textContent = t.name;
+      a.append(tile, name); grid.append(a);
     }
+    const add = document.createElement('button'); add.className = 'tool'; add.type = 'button'; add.setAttribute('aria-label', 'הוסף כלי');
+    add.innerHTML = '<span class="tile add">' + svg('plus') + '</span><span class="name">הוסף</span>';
+    add.onclick = () => { addRow(type); openSettings(); };
+    grid.append(add);
   }
 }
-render();
 
-// editable texts
-const texts = store.get('tb.texts', {});
-document.querySelectorAll('[data-edit]').forEach(el => {
-  const k = el.dataset.edit; if (texts[k]) el.textContent = texts[k];
-  el.addEventListener('blur', () => { texts[k] = el.textContent.trim() || el.textContent; store.set('tb.texts', texts); });
-});
-$('#btn-edit').onclick = e => {
-  const on = document.body.classList.toggle('editing');
-  e.currentTarget.setAttribute('aria-pressed', on);
-  document.querySelectorAll('[data-edit]').forEach(el => el.contentEditable = on ? 'plaintext-only' : 'false');
-};
-
-// add tool
-$('#btn-add').onclick = () => { $('#form-add').reset(); $('#dlg-add').showModal(); };
-$('#dlg-add').addEventListener('close', () => {
-  if ($('#dlg-add').returnValue !== 'ok') return;
-  const url = $('#f-url').value.trim();
-  if (!safeUrl(url)) return alert('קישור לא תקין');
-  tools.push({id:'t' + Date.now(), name:$('#f-name').value.trim(), type:$('#f-type').value, url});
-  store.set('tb.tools', tools); render();
-});
-
-// settings
+// settings: shortcut editor
+function addRow(type){
+  tools.push({id:'t' + Date.now(), name:'כלי חדש', type, url:type === 'web' ? 'https://' : 'app://', icon:'star'});
+  save(); render(); renderRows();
+}
+function renderRows(){
+  const box = $('#rows'); box.replaceChildren();
+  for (const t of tools) {
+    const row = document.createElement('div'); row.className = 'row';
+    const tile = document.createElement('span'); paintTile(tile, t);
+    const name = Object.assign(document.createElement('input'), {className:'field', value:t.name, maxLength:40, ariaLabel:'שם הכלי'});
+    const url = Object.assign(document.createElement('input'), {className:'field', value:t.url, ariaLabel:'קישור או קיצור'}); url.dir = 'ltr';
+    const type = document.createElement('select'); type.className = 'field'; type.setAttribute('aria-label', 'סוג');
+    type.innerHTML = '<option value="desktop">דסקטופ</option><option value="web">רשת</option>'; type.value = t.type;
+    const icon = document.createElement('select'); icon.className = 'field'; icon.setAttribute('aria-label', 'אייקון');
+    for (const k of Object.keys(ICON_LABELS)) icon.add(new Option(ICON_LABELS[k], k));
+    icon.value = ICON_LABELS[t.icon] ? t.icon : 'letter';
+    const del = Object.assign(document.createElement('button'), {className:'btn danger', type:'button', textContent:'מחק'});
+    const full = document.createElement('div'); full.className = 'full'; full.append(type, icon, del);
+    const upd = (rerender) => { save(); render(); paintTile(tile, t); if (rerender) renderRows(); };
+    name.oninput = () => { t.name = name.value.trim() || 'כלי'; upd(); };
+    url.onchange = () => { t.url = url.value.trim(); if (!safeUrl(t.url)) { url.value = t.url = t.type === 'web' ? 'https://' : 'app://'; alert('קישור לא תקין'); } upd(); };
+    type.onchange = () => { t.type = type.value; upd(); };
+    icon.onchange = () => { t.icon = icon.value; upd(); };
+    del.onclick = () => { tools = tools.filter(x => x !== t); upd(true); };
+    row.append(tile, name, url, full); box.append(row);
+  }
+}
 const dlgS = $('#dlg-settings');
-$('#btn-settings').onclick = () => { $('#s-key').value = store.get('tb.key', ''); $('#s-model').value = store.get('tb.model', 'claude-sonnet-5-5'); dlgS.showModal(); };
-dlgS.addEventListener('close', () => {
-  if (dlgS.returnValue !== 'ok') return;
-  store.set('tb.key', $('#s-key').value.trim()); store.set('tb.model', $('#s-model').value.trim() || 'claude-sonnet-5-5');
-});
+function openSettings(){ renderRows(); $('#s-key').value = store.get('tb2.key', ''); $('#s-model').value = store.get('tb2.model', 'claude-sonnet-5-5'); if (!dlgS.open) dlgS.showModal(); }
+$('#btn-settings').onclick = openSettings;
+$('#btn-add-row').onclick = () => addRow('web');
+$('#btn-close-settings').onclick = () => { store.set('tb2.key', $('#s-key').value.trim()); store.set('tb2.model', $('#s-model').value.trim() || 'claude-sonnet-5-5'); dlgS.close(); };
+dlgS.addEventListener('cancel', () => { store.set('tb2.key', $('#s-key').value.trim()); store.set('tb2.model', $('#s-model').value.trim() || 'claude-sonnet-5-5'); });
 for (const n of [1, 2]) {
-  const img = $('#logo' + n), saved = store.get('tb.logo' + n, null); if (saved) img.src = saved;
+  const img = $('#logo' + n), saved = store.get('tb2.logo' + n, null); if (saved) img.src = saved;
   $('#s-logo' + n).onchange = e => {
     const f = e.target.files[0]; if (!f) return;
-    const r = new FileReader(); r.onload = () => { img.src = r.result; store.set('tb.logo' + n, r.result); }; r.readAsDataURL(f);
+    const r = new FileReader(); r.onload = () => { img.src = r.result; store.set('tb2.logo' + n, r.result); }; r.readAsDataURL(f);
   };
 }
-$('#btn-reset').onclick = () => { if (confirm('למחוק את כל הנתונים השמורים?')) { ['tb.tools','tb.texts','tb.key','tb.model','tb.logo1','tb.logo2'].forEach(store.del); location.reload(); } };
+$('#btn-reset').onclick = () => { if (confirm('למחוק את כל הנתונים השמורים?')) { ['tools','key','model','logo1','logo2'].forEach(k => store.del('tb2.' + k)); location.reload(); } };
 $('#btn-help').onclick = () => $('#dlg-help').showModal();
 $('#btn-exit').onclick = () => { if (confirm('לצאת מארגז הכלים?')) { window.close(); setTimeout(() => { document.body.replaceChildren(Object.assign(document.createElement('p'), {textContent:'יצאת. אפשר לסגור את הלשונית.', style:'padding:32px'})); }, 150); } };
+render();
 
 // chat
 const history = [];
@@ -249,7 +282,7 @@ function addMsg(cls, text){ const d = document.createElement('div'); d.className
 $('#chat-form').onsubmit = async e => {
   e.preventDefault();
   const input = $('#chat-input'), text = input.value.trim(); if (!text) return;
-  const key = store.get('tb.key', '');
+  const key = store.get('tb2.key', '');
   if (!key) { addMsg('bot err', 'חסר מפתח API. הוסף אותו בהגדרות (סמל גלגל השיניים).'); return; }
   input.value = ''; addMsg('user', text); history.push({role:'user', content:text});
   const pending = addMsg('bot', '…'); $('#send').disabled = true;
@@ -257,7 +290,7 @@ $('#chat-form').onsubmit = async e => {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
       headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:store.get('tb.model','claude-sonnet-5-5'), max_tokens:1024, messages:history})
+      body:JSON.stringify({model:store.get('tb2.model','claude-sonnet-5-5'), max_tokens:1024, messages:history})
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data?.error?.message || res.statusText);
